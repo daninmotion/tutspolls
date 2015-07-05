@@ -1,0 +1,21 @@
+<% @poll.replies.each do |reply| %>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading text-right">
+        <%= time_ago_in_words reply.created_at %>
+      </div>
+      <div class="panel-body">
+        <dl>
+          <% reply.answers.each do |answer| %>
+            <dt>
+              <%= answer.question.title %>
+            </dt>
+            <dd>
+              <%= answer.value.present? ? answer.value : answer.possible_answer.title %>
+            </dd>
+          <% end %>
+        </dl>
+      </div>
+    </div>
+  </div>
+<% end %>

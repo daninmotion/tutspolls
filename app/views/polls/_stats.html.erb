@@ -1,0 +1,45 @@
+<div id="polls_per_month">
+  <script>
+    
+    (function($) {
+      $(function() {
+        var selector = "#polls_per_month";
+        var data = #{@poll.serialize_for_graph};
+        Graph.column(selector,data);
+      });
+    })(jQuery);
+
+
+  </script>
+</div>
+<div id="answers_per_question">
+  <% @poll.questions.each do |question| %>
+    <% if question.kind == "choice" %>
+      <div class="answer-per-question" id="answers-per-question-<%= question.id %>">
+        <script>
+          
+          (function($) {
+            $(function() {
+              var selector = "#answers-per-question-#{question.id}";
+              var data = #{question.serialize_for_graph};
+              Graph.pie(selector,data);
+            });
+          })(jQuery);
+
+
+        </script>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<% content_for :footer do %>
+  <script>
+    
+    google.setOnLoadCallback(function() {
+      Graph.instances.forEach(function(instance) {
+        instance.render();
+      });
+    });
+
+  </script>
+<% end %>

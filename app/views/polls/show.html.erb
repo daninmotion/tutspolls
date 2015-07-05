@@ -1,0 +1,34 @@
+<h1>
+  <%= @poll.title %>
+</h1>
+<ul class="nav nav-tabs">
+  <li class="active">
+    <%= link_to "#tab-questions", data: { toggle: "tab" } do %>
+      <span class="glyphicon glyphicon-th-list"></span>
+      Questions
+    <% end %>
+  </li>
+  <li>
+    <%= link_to "#tab-replies", data: { toggle: "tab" } do %>
+      <span class="glyphicon glyphicon-list-alt"></span>
+      Replies
+    <% end %>
+  </li>
+  <li>
+    <%= link_to "#tab-stats", data: { toggle: "tab" } do %>
+      <span class="glyphicon glyphicon-stats"></span>
+      Stats
+    <% end %>
+  </li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane active" id="tab-questions">
+    <%= render "questions" %>
+  </div>
+  <div class="tab-pane" id="tab-replies">
+    <%= render "replies" %>
+  </div>
+  <div class="tab-pane" id="tab-stats">
+    <%= render "stats" %>
+  </div>
+</div>

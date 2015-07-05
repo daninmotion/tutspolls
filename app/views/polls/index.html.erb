@@ -1,0 +1,27 @@
+<h1>Listing polls</h1>
+
+  <ul>
+    <% @polls.each do |poll| %>
+      <li>
+        <p>
+          <% if current_user && current_user.admin? %>
+            <%= link_to poll.title, poll %>
+          <% else %>
+            <%= poll.title %>
+          <% end %>
+        <p>
+	        <p class="btn-group btn-group-xs">
+	        <%= link_to 'Edit', edit_poll_path(poll), class: "btn btn-default" if current_user && current_user.admin? %> 
+	        <%= link_to 'Destroy', poll, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default"  if current_user && current_user.admin? %>
+	   		  <%= link_to 'Add question', new_poll_question_path(poll), class: "btn btn-default" if current_user && current_user.admin? %>
+          <%= link_to 'Answers', new_poll_reply_path(poll), class: "btn btn-default" %>
+   		</p>
+      </li>
+    <% end %>
+  </ul>
+
+<br>
+
+<% if current_user && current_user.admin? %>
+  <%= link_to 'New Poll', new_poll_path, class: "btn btn-primary" %>
+<% end %>
